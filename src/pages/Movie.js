@@ -3,13 +3,14 @@ import { useGlobalContext } from "../context/context";
 import { Card, CardContent, CardMedia, Grid, Typography } from "@mui/material";
 import { Container } from "@mui/system";
 import { NavLink, Link } from "react-router-dom";
+import Tooltip from '@mui/material/Tooltip';
 
 const Movie = () => {
   const { movie, isLoading } = useGlobalContext();
 
   if (isLoading) {
     return (
-      <div className="main_box">
+      <div style={{textAlign: "center"}}>
         <h4>Loading...</h4>
       </div>
     );
@@ -31,7 +32,8 @@ const Movie = () => {
                       to={`movie/${imdbID}`}
                       style={{ textDecoration: "none" }}
                     >
-                      <Card>
+                     
+                     <Card>
                         <Typography
                           variant="h6"
                           sx={{
@@ -39,22 +41,26 @@ const Movie = () => {
                             fontSize: "19px",
                             margin: "7px",
                             fontFamily: "monospace",
-                            objectFit: "contain",
+                            
                           }}
-                          component="div"
+                          // component="div"
                         >
                           {Title.length >= 10 ? `${movieName}...` : movieName}
                         </Typography>
+                        <Tooltip title={Title} placement="bottom">
                         <CardMedia
                           component="img"
                           image={Poster}
                           height="200"
                           width="250"
+                          style={{ objectFit: "contain"}}
                         />
+                        </Tooltip>
                         <CardContent>
                           <Typography></Typography>
                         </CardContent>
                       </Card>
+                     
                     </Link>
                   </div>
                 </Grid>

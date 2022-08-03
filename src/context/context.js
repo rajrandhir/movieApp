@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 
-const API_URL = `https://www.omdbapi.com/?apikey=10d214da%20`;
+export const API_URL = `https://www.omdbapi.com/?apikey=10d214da%20`;
 
 const AppContext = React.createContext();
 const AppProvider = ({ children }) => {
@@ -9,10 +9,12 @@ const AppProvider = ({ children }) => {
   const [isError, setIsError] = useState({ show: "false", msg: "" });
   const [querry, setQuerry] = useState("titanic");
   const getMovie = async (url) => {
+    setIsLoading(true);
     try {
       const res = await fetch(url);
       const resData = await res.json();
       if (resData.Response === "True") {
+        setIsLoading(false);
         setMovie(resData.Search);
        if(resData.Search){
         setIsError({
